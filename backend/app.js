@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv"
 import authRoutes from "./routes/auth.routes.js";
 import {connDB} from "./libs/db.js";
@@ -15,14 +16,20 @@ const connStr = process.env.CONNDB
 
 const server = express();
 
-server.use(express.json());
+server.use(cors({
+  origin: 'http://localhost:5173', // Allow only your frontend
+  methods: 'GET,POST,PUT,DELETE,PATCH',
+  credentials: true
+}));
+
+server.use(express.json({limit :"10mb"}));
 server.use(cookieParser());
 
 server.use("/api/auth", authRoutes);
 server.use("/api/products", productRoutes);
-server.use("api/cart", cartRoutes);
+server.use("/api/cart", cartRoutes);
 server.use("/api/coupons", couponRoutes);
-server.use("/api/payment", paymentRoutes);
+server.use("/api/payments", paymentRoutes);
 
 server.listen(port, () => {
   console.log(`The server is running at port ${port} successfully`);

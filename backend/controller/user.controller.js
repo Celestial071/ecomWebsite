@@ -51,12 +51,13 @@ export const signup = async (req, res) => {
 
         setCookies(res, accessToken, refreshToken);
 
-        res.status(201).json({user:{
+        res.status(201).json({
             _id: user._id,
             name: user.username,
             email: user.email,
             role: user.role,
-        },message: "User created successfully"});
+        });
+
     } catch (error) {
         console.log("error in signup controller");
         res.status(500).json({"message" : error.message});
@@ -100,7 +101,7 @@ export const login = async (req, res) => {
                 role: user.role
             });
         }else{
-            res.status(401).json({message: "Incorrect email or password"});
+            res.status(400).json({message: "Incorrect email or password"});
         }
     }catch(error){
         console.log("error in login controller");
@@ -142,6 +143,10 @@ export const renewToken = async(req, res) => {
     }
 }
 
-export const userProfile = async (req, res) => {
-    
+export const getProfile = async (req, res) => {
+    try{
+        res.json(req.user);
+    } catch (error) {
+        res.status(500).json({message: "Server Error", error: error.message});
+    }
 }
