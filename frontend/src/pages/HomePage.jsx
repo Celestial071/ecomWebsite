@@ -7,6 +7,7 @@ import moboimg from "../assets/mobo.png"
 import ram from "../assets/RAM.png"
 import monitor from "../assets/monitor.png"
 import keyboard from "../assets/keyboard.png"
+import gpuimg from "../assets/5090img.jpg"
 import { useProductStore } from "../stores/useProductStore";
 import FeaturedProducts from "../components/FeaturedProducts";
 
@@ -17,6 +18,7 @@ const categories = [
 	{ href: "/RAMs", name: "RAM", imageUrl: ram },
 	{ href: "/monitors", name: "monitors", imageUrl: monitor },
 	{ href: "/Keyboards", name: "Keyboards", imageUrl: keyboard	 },
+	{ href: "/gpus", name: "Gpu", imageUrl: gpuimg}
 ];
 
 const HomePage = () => {
